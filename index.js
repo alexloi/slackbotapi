@@ -52,9 +52,11 @@ var connectSlack = function(wsurl) {
     });
     ws.on('close', function(data) {
         logger.output({severity:'error', source:'Socket',message:'Disconnected. Error: '+data,timestamp: new Date(),location: os.hostname()});
+        ws = new webSocket(wsurl);
     });
     ws.on('close', function(data) {
         logger.output({severity:'error', source:'Socket',message:'Error. Error: '+data,timestamp: new Date(),location: os.hostname()});
+        ws = new webSocket(wsurl);
     });
     ws.on('message', function(data) {
         logger.output({severity:'debug', source:'Socket | Receive',message: data,timestamp: new Date(),location: os.hostname()});
